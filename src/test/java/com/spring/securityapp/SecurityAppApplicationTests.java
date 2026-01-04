@@ -17,6 +17,7 @@ class SecurityAppApplicationTests {
 
 		UserEntity user = new UserEntity(
 				4L,
+				"Shekhar",
 				"shekhar@gmail.com",
 				"1234"
 		);
