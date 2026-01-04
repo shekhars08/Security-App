@@ -1,6 +1,5 @@
 package com.spring.securityapp.service;
 
-import com.spring.securityapp.dto.SignInDTO;
 import com.spring.securityapp.dto.SignUpDTO;
 import com.spring.securityapp.dto.UserDTO;
 import com.spring.securityapp.entities.UserEntity;
@@ -8,10 +7,7 @@ import com.spring.securityapp.exceptions.ResourceNotFoundException;
 import com.spring.securityapp.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -32,6 +28,11 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByEmail(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User with email " + username + " not found"));
+    }
+
+    public UserEntity getUserById(Long userId){
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User with userID " + userId + " not found"));
     }
 
     public UserDTO signup(SignUpDTO signUpDTO) {
